@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:05:01 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:09:42 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/09 18:48:02 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,81 @@ typedef struct s_simulation
 
 t_simulation		g_simulation;
 
+/*
+********************************************************************************
+*/
+
+/*
+** Инициализация глобальной структуры g_simulation
+*/
 int					ft_init_simulation(t_simulation *simulation, int argc, \
 															char const *argv[]);
+
+/*
+** Инициализация философов
+*/
 t_philosopher		*ft_init_philosophers_for_simulation(int size);
+
+/*
+** Создание мьютексов
+*/
 pthread_mutex_t		*ft_init_table(int size);
+
+/*
+** Жизнь философов (едят, спят, думают)
+*/
 void				*ft_routina(void *args);
+
+/*
+** Создание потоков филосовоф
+*/
 int					ft_create_thread_philo(t_philosopher *philosopher, \
 																	int size);
+
+/*
+** Отсоединение потоков филосовоф
+*/
 int					ft_detach_thread_philo(t_philosopher *philosopher, \
 																	int size);
+
+/*
+** Начало симуляции
+*/
 void				*ft_start_simulation(void *args);
+
+/*
+** Проверка на количество обедов у философов
+*/
 int					ft_check_count_eat(t_philosopher *philosopher, int size);
+
+/*
+** Проверка на смерть какого либо философа
+*/
 int					ft_check_death(t_philosopher *philosopher);
+
+/*
+** Создание наблюдателя за философами
+*/
 void				ft_create_supervisord(void);
+
+/*
+** Наблюдение за каждым философом, проверяет сколько рвз поел философ 
+*/
 void				ft_observation_of_philo(t_philosopher *philosopher, \
 																	int size);
+
+/*
+** Деструктор симуляции
+*/
 void				ft_destroy_simulation(t_simulation *simulation);
+
+/*
+** Вывод сообщения в 1 дескриптор
+*/
 void				ft_print_message(int id, char *message);
+
+/*
+********************************************************************************
+*/
 
 #endif
