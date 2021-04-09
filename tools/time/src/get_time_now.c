@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argument_value.c                                   :+:      :+:    :+:   */
+/*   get_time_now.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:34:39 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:27:06 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/08 23:40:48 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:23:12 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "time_t.h"
 
-int	ft_check_argument_value(int argc, char const *argv[])
+unsigned long	ft_get_time_now(unsigned long t_time)
 {
-	int		counter;
-
-	counter = 1;
-	while (counter < argc)
-	{
-		if (ft_isnumber(argv[counter]) == 0)
-		{
-			printf(BAD_ARG);
-			return (1);
-		}
-		++counter;
-	}
-	return (0);
+	return (ft_gettimeofday() - t_time);
 }

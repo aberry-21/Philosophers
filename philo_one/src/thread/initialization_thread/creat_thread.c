@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation_value.c                                 :+:      :+:    :+:   */
+/*   creat_thread.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:35:13 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:26:15 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:20:44 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:20:50 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "simulation.h"
 
-int	ft_validation_value(int argc, char const *argv[], \
-															t_data *input_data)
+int	ft_create_thread_philo(t_philosopher *philosopher, int size)
 {
 	int		counter;
-	int		*prt_struct;
-	long	value;
+	int		status;
 
 	counter = 0;
-	prt_struct = (int *)input_data;
-	while (counter < argc - 1)
+	g_simulation.t_time = ft_get_time_now(0);
+	while (counter < size)
 	{
-		value = ft_get_number(argv[counter + 1]);
-		if (ft_ismoreint(value, argv[counter + 1]))
+		status = pthread_create(&philosopher[counter].thread_philo, \
+									NULL, ft_routina, &philosopher[counter]);
+		if (status != SUCCESS)
 		{
-			printf(BAD_ARG);
-			return (1);
+			ft_detach_thread_philo(philosopher, counter);
+			printf(ERR_THREAD);
+			return (FAIL);
 		}
-		prt_struct[counter] = (int)value;
 		++counter;
 	}
-	if (input_data->number_of_philo > 500)
-	{
-		printf(MANY_PHILO);
-		return (1);
-	}
-	return (0);
+	return (SUCCESS);
 }

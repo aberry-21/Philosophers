@@ -6,7 +6,7 @@
 #    By: aberry <aberry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 20:48:28 by aberry            #+#    #+#              #
-#    Updated: 2021/04/05 22:15:05 by aberry           ###   ########.fr        #
+#    Updated: 2021/04/09 17:38:13 by aberry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,13 @@ NAME		=	philo_one
 
 CC			=	gcc
 
-TOOLS		=	$(addprefix  ../tools/, input)
+TOOLS		=	$(addprefix  ../tools/, input time)
 
 INC			=	$(addprefix -I, $(addsuffix /includes/, . $(TOOLS)))
 
-CFLAGS		=	-O3 -MMD $(INC) #-Wall -Wextra -Werror 
+CFLAGS		=	-O3 -MMD $(INC) -Wall -Wextra -Werror 
 
-FILES		=	$(addprefix $(addsuffix /src/, $(TOOLS)), \
+FILES		=	$(addprefix ../tools/input/src/, \
 					$(addprefix utils/,\
 						get_number.c\
 						isdigit.c\
@@ -40,7 +40,37 @@ FILES		=	$(addprefix $(addsuffix /src/, $(TOOLS)), \
 						validation_value.c\
 					)\
 				)\
+				$(addprefix ../tools/time/src/, \
+						msleep.c\
+						gettimeofday.c\
+						get_time_now.c\
+					)\
 				$(addprefix src/,\
+					$(addprefix initialization/,\
+						init_philosophers.c\
+						init_simulation.c\
+						init_table.c\
+					)\
+					$(addprefix utils/,\
+						destroy_simulation.c\
+						print_message.c\
+					)\
+					$(addprefix thread/,\
+						$(addprefix philosopher/,\
+							live_philo.c\
+						)\
+						$(addprefix supervisor/,\
+							check_count_eat.c\
+							check_death.c\
+							create.c\
+							observation_of_philo.c\
+						)\
+						$(addprefix initialization_thread/,\
+							creat_thread.c\
+							detach_thread.c\
+						)\
+						start_simulation.c\
+					)\
 					main.c\
 				)
 

@@ -6,13 +6,13 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 20:32:45 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/05 20:33:53 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/09 18:26:59 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-int			ft_check_argument_size(int argc)
+int	ft_check_argument_size(int argc)
 {
 	if (argc > 6)
 	{

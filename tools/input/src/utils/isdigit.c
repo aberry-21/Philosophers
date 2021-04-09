@@ -6,13 +6,13 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 19:13:16 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/05 19:41:22 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/09 18:38:13 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	return (c > 47 && c < 58);
 }

@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argument_value.c                                   :+:      :+:    :+:   */
+/*   gettimeofday.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:34:39 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:27:06 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/08 22:06:23 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:23:16 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "time_t.h"
 
-int	ft_check_argument_value(int argc, char const *argv[])
+unsigned long	ft_gettimeofday(void)
 {
-	int		counter;
+	struct timeval	current_time;
 
-	counter = 1;
-	while (counter < argc)
-	{
-		if (ft_isnumber(argv[counter]) == 0)
-		{
-			printf(BAD_ARG);
-			return (1);
-		}
-		++counter;
-	}
-	return (0);
+	gettimeofday(&current_time, NULL);
+	return ((current_time.tv_sec) * 1000 + (current_time.tv_usec) / 1000);
 }

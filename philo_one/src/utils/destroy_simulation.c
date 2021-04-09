@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argument_value.c                                   :+:      :+:    :+:   */
+/*   destroy_simulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:34:39 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:27:06 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:26:25 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:16:59 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "simulation.h"
 
-int	ft_check_argument_value(int argc, char const *argv[])
+void	ft_destroy_simulation(t_simulation *simulation)
 {
 	int		counter;
 
-	counter = 1;
-	while (counter < argc)
+	counter = 0;
+	if (simulation->print_lock.__sig)
+		pthread_mutex_destroy(&simulation->print_lock);
+	if (simulation->forks)
 	{
-		if (ft_isnumber(argv[counter]) == 0)
+		while (counter < simulation->input_data->number_of_philo)
 		{
-			printf(BAD_ARG);
-			return (1);
+			if (simulation->forks[counter].__sig)
+				pthread_mutex_destroy(&simulation->forks[counter]);
+			++counter;
 		}
-		++counter;
 	}
-	return (0);
+	free(simulation->forks);
+	free(simulation->input_data);
 }

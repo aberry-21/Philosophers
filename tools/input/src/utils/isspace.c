@@ -6,17 +6,17 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 19:09:40 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/05 19:41:22 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/09 18:38:36 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include "input.h"
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
-	if (c == '\t' || c == '\n' || c == '\v' ||
-		c == '\f' || c == '\r' || c == ' ')
+	if (c == '\t' || c == '\n' || c == '\v'
+		||c == '\f' || c == '\r' || c == ' ')
 		return (true);
 	else
 		return (false);

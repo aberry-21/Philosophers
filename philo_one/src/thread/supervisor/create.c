@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argument_value.c                                   :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:34:39 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:27:06 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:22:28 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:19:01 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "simulation.h"
 
-int	ft_check_argument_value(int argc, char const *argv[])
+void	ft_create_supervisord(void)
 {
-	int		counter;
+	int			status;
+	pthread_t	supervisord_thread;
 
-	counter = 1;
-	while (counter < argc)
+	status = pthread_create(&supervisord_thread, NULL, ft_start_simulation, 0);
+	if (status != SUCCESS)
 	{
-		if (ft_isnumber(argv[counter]) == 0)
-		{
-			printf(BAD_ARG);
-			return (1);
-		}
-		++counter;
+		printf(ERR_THREAD);
+		return ;
 	}
-	return (0);
+	status = pthread_join(supervisord_thread, 0);
+	if (status != SUCCESS)
+	{
+		printf(ERR_JOIN);
+		return ;
+	}
 }

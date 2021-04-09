@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation_value.c                                 :+:      :+:    :+:   */
+/*   check_count_eat.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:35:13 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:26:15 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:24:11 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:17:46 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "simulation.h"
 
-int	ft_validation_value(int argc, char const *argv[], \
-															t_data *input_data)
+int	ft_check_count_eat(t_philosopher *philosopher, int size)
 {
 	int		counter;
-	int		*prt_struct;
-	long	value;
 
 	counter = 0;
-	prt_struct = (int *)input_data;
-	while (counter < argc - 1)
+	while (counter < size)
 	{
-		value = ft_get_number(argv[counter + 1]);
-		if (ft_ismoreint(value, argv[counter + 1]))
-		{
-			printf(BAD_ARG);
+		if (philosopher[counter].count_eat !=\
+									g_simulation.input_data->number_of_lunch)
 			return (1);
-		}
-		prt_struct[counter] = (int)value;
 		++counter;
-	}
-	if (input_data->number_of_philo > 500)
-	{
-		printf(MANY_PHILO);
-		return (1);
 	}
 	return (0);
 }

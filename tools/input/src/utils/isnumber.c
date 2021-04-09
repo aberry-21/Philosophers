@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include "input.h"
 
-int			ft_isnumber(const char *line)
+int	ft_isnumber(const char *line)
 {
 	size_t		counter;
 

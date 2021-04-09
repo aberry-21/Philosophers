@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argument_value.c                                   :+:      :+:    :+:   */
+/*   init_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:34:39 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:27:06 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/06 21:47:10 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:22:13 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "simulation.h"
 
-int	ft_check_argument_value(int argc, char const *argv[])
+pthread_mutex_t	*ft_init_table(int size)
 {
-	int		counter;
+	int				counter;
+	int				status;
+	pthread_mutex_t	*forks;
 
-	counter = 1;
-	while (counter < argc)
+	counter = 0;
+	forks = (pthread_mutex_t *)malloc(size * sizeof(pthread_mutex_t));
+	if (forks == 0)
+		return ((pthread_mutex_t *)0);
+	while (counter < size)
 	{
-		if (ft_isnumber(argv[counter]) == 0)
+		status = pthread_mutex_init(&forks[counter], NULL);
+		if (status != SUCCESS)
 		{
-			printf(BAD_ARG);
-			return (1);
+			printf(ERR_MUTEX);
+			return ((pthread_mutex_t *)0);
 		}
 		++counter;
 	}
-	return (0);
+	return (forks);
 }

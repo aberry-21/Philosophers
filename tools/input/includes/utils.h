@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 18:05:01 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/05 20:37:02 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 18:25:06 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:25:42 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#ifndef UTILS_H
+# define UTILS_H
 
-#include <stdio.h>
+# include <stdio.h>
 
 /*
 *************************************TOOLS**************************************

@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argument_value.c                                   :+:      :+:    :+:   */
+/*   print_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:34:39 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:27:06 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:26:41 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:17:16 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "simulation.h"
 
-int	ft_check_argument_value(int argc, char const *argv[])
+void	ft_print_message(int id, char *message)
 {
-	int		counter;
-
-	counter = 1;
-	while (counter < argc)
-	{
-		if (ft_isnumber(argv[counter]) == 0)
-		{
-			printf(BAD_ARG);
-			return (1);
-		}
-		++counter;
-	}
-	return (0);
+	pthread_mutex_lock(&g_simulation.print_lock);
+	printf("\033[1;32m%lu\033[0m\t\033[1;36m%d\033[0m %s", \
+						ft_get_time_now(g_simulation.t_time), id, message);
+	pthread_mutex_unlock(&g_simulation.print_lock);
 }

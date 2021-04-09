@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 19:26:23 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/05 20:35:25 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/09 18:26:46 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string.h>
 #include "input.h"
 
-t_data		*ft_init_simulation_arg(int argc, char const *argv[])
+t_data	*ft_init_simulation_arg(int argc, char const *argv[])
 {
 	t_data		*input_data;
 
@@ -26,7 +26,9 @@ t_data		*ft_init_simulation_arg(int argc, char const *argv[])
 	if (input_data == 0)
 		return ((t_data *)0);
 	memset((void *)input_data, 0, sizeof(t_data));
-	if(ft_validation_value(argc, argv, input_data))
+	if (argc != 6)
+		input_data->number_of_lunch = -1;
+	if (ft_validation_value(argc, argv, input_data))
 	{
 		free(input_data);
 		input_data = 0;

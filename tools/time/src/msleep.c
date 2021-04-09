@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argument_value.c                                   :+:      :+:    :+:   */
+/*   msleep.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 20:34:39 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:27:06 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/06 19:05:29 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:23:42 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "time_t.h"
 
-int	ft_check_argument_value(int argc, char const *argv[])
+int	ft_msleep(useconds_t time)
 {
-	int		counter;
+	unsigned long	current_time;
+	unsigned long	required_time;
 
-	counter = 1;
-	while (counter < argc)
+	current_time = ft_gettimeofday();
+	required_time = current_time + time;
+	while (current_time <= required_time)
 	{
-		if (ft_isnumber(argv[counter]) == 0)
-		{
-			printf(BAD_ARG);
+		if (usleep(10) == 1)
 			return (1);
-		}
-		++counter;
+		current_time = ft_gettimeofday();
 	}
 	return (0);
 }
