@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:05:01 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/11 17:51:44 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/11 18:42:11 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <semaphore.h>
 # include "input.h"
 # include "time_t.h"
 
@@ -25,7 +26,11 @@
 # define ERR_THREAD "Main error: can't create process\n"
 # define ERR_JOIN "Main error: can't start join\n"
 # define ERR_DETACH "Main error: can't start detach\n"
-# define ERR_MUTEX "Main error: can't create mutex\n"
+# define ERR_SEM "Main error: can't open semaphore\n"
+
+# define FORKS_SEM "forks_sem"
+# define PRINT_SEM "print_sem"
+
 # define TAKE_FORK " has taken a fork\n"
 # define EATING " is eating\n"
 # define SLEEPING " is sleeping\n"
@@ -38,16 +43,15 @@ typedef struct s_philosopher
 	int				id;
 	int				count_eat;
 	unsigned long	time_last_eat;
-	unsigned int	left_fork;
-	unsigned int	right_fork;
 }					t_philosopher;
 
 typedef struct s_simulation
 {
 	t_data			*input_data;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_lock;
+	sem_t			*forks;
+	sem_t			*print_lock;
 	unsigned long	t_time;
+	int				dead_philo;
 }					t_simulation;
 
 t_simulation		g_simulation;
@@ -66,11 +70,6 @@ int					ft_init_simulation(t_simulation *simulation, int argc, \
 ** Инициализация философов
 */
 t_philosopher		*ft_init_philosophers_for_simulation(int size);
-
-/*
-** Создание мьютексов
-*/
-pthread_mutex_t		*ft_init_table(int size);
 
 /*
 ** Жизнь философов (едят, спят, думают)

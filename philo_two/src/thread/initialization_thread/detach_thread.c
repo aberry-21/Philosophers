@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_death.c                                      :+:      :+:    :+:   */
+/*   detach_thread.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 17:24:15 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:18:49 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:21:03 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:20:37 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "simulation.h"
 
-int	ft_check_death(t_philosopher *philosopher)
+int	ft_detach_thread_philo(t_philosopher *philosopher, int size)
 {
-	unsigned long		past_time;
-	unsigned long		time_to_die;
+	int		counter;
+	int		status;
 
-	time_to_die = g_simulation.input_data->time_to_die + 5;
-	past_time = ft_get_time_now(g_simulation.t_time) \
-												- philosopher->time_last_eat;
-	if (past_time >= time_to_die)
-		return (1);
-	return (0);
+	counter = 0;
+	while (counter < size)
+	{
+		status = pthread_detach(philosopher[counter].thread_philo);
+		if (status != SUCCESS)
+		{
+			printf(ERR_DETACH);
+			return (FAIL);
+		}
+		++counter;
+	}
+	return (SUCCESS);
 }

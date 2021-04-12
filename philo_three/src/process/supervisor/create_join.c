@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_death.c                                      :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 17:24:15 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:18:49 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:22:28 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:19:01 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "simulation.h"
 
-int	ft_check_death(t_philosopher *philosopher)
+void	ft_create_supervisord_join(void *(*start_routine)(void *), void *arg)
 {
-	unsigned long		past_time;
-	unsigned long		time_to_die;
+	int			status;
+	pthread_t	supervisord_thread;
 
-	time_to_die = g_simulation.input_data->time_to_die + 5;
-	past_time = ft_get_time_now(g_simulation.t_time) \
-												- philosopher->time_last_eat;
-	if (past_time >= time_to_die)
-		return (1);
-	return (0);
+	status = pthread_create(&supervisord_thread, NULL, start_routine, arg);
+	if (status != SUCCESS)
+	{
+		printf(ERR_THREAD);
+		return ;
+	}
+	status = pthread_join(supervisord_thread, 0);
+	if (status != SUCCESS)
+	{
+		printf(ERR_JOIN);
+		return ;
+	}
 }

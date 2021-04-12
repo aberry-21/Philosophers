@@ -12,15 +12,27 @@
 
 #include "simulation.h"
 
-int	ft_check_death(t_philosopher *philosopher)
+void	*ft_observation_of_philo(void *args)
 {
-	unsigned long		past_time;
-	unsigned long		time_to_die;
+	t_philosopher	*philosopher;
 
-	time_to_die = g_simulation.input_data->time_to_die + 5;
-	past_time = ft_get_time_now(g_simulation.t_time) \
-												- philosopher->time_last_eat;
-	if (past_time >= time_to_die)
-		return (1);
-	return (0);
+	philosopher = (t_philosopher *)args;
+	while (1)
+	{
+		if (ft_check_count_eat(philosopher) == 0)
+		{
+			sem_post(g_simulation.eat_philo);
+			break ;
+		}
+		if (ft_check_death(philosopher))
+		{
+			sem_wait(g_simulation.print_lock);
+			printf("\033[1;32m%lu\033[0m\t\033[1;36m%d\033[0m %s", \
+									ft_get_time_now(g_simulation.t_time), \
+									philosopher->id, DYING);
+			sem_post(g_simulation.dead_philo);
+			break ;
+		}
+	}
+	exit(0);
 }

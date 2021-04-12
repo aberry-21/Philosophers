@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_death.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 17:24:15 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:18:49 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/05 20:55:29 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/11 18:42:59 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "simulation.h"
 
-int	ft_check_death(t_philosopher *philosopher)
+int	main(int argc, char const *argv[])
 {
-	unsigned long		past_time;
-	unsigned long		time_to_die;
+	int			status;
 
-	time_to_die = g_simulation.input_data->time_to_die + 5;
-	past_time = ft_get_time_now(g_simulation.t_time) \
-												- philosopher->time_last_eat;
-	if (past_time >= time_to_die)
-		return (1);
-	return (0);
+	status = ft_init_simulation(&g_simulation, argc, argv);
+	if (status != SUCCESS)
+	{
+		ft_destroy_simulation(&g_simulation);
+		return (FAIL);
+	}
+	ft_create_supervisord();
+	ft_destroy_simulation(&g_simulation);
+	return (SUCCESS);
 }

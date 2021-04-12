@@ -17,10 +17,10 @@
 # include <stdio.h>
 # include "utils.h"
 
-# define BAD_ARG "Input: arguments must be int number"
-# define MANY_ARG "Input: too many arguments"
-# define FEW_ARG "Input: too few arguments"
-# define MANY_PHILO "Input: too many threads"
+# define BAD_ARG "Input: arguments must be int number\n"
+# define MANY_ARG "Input: too many arguments\n"
+# define FEW_ARG "Input: too few arguments\n"
+# define MANY_PHILO "Input: too many thread\n"
 
 typedef struct s_data
 {

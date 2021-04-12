@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_death.c                                      :+:      :+:    :+:   */
+/*   check_count_eat.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 17:24:15 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:18:49 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:24:11 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:17:46 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "simulation.h"
 
-int	ft_check_death(t_philosopher *philosopher)
+int	ft_check_count_eat(t_philosopher *philosopher, int size)
 {
-	unsigned long		past_time;
-	unsigned long		time_to_die;
+	int		counter;
 
-	time_to_die = g_simulation.input_data->time_to_die + 5;
-	past_time = ft_get_time_now(g_simulation.t_time) \
-												- philosopher->time_last_eat;
-	if (past_time >= time_to_die)
-		return (1);
+	counter = 0;
+	while (counter < size)
+	{
+		if (philosopher[counter].count_eat !=\
+									g_simulation.input_data->number_of_lunch)
+			return (1);
+		++counter;
+	}
 	return (0);
 }

@@ -12,19 +12,18 @@
 
 #include "simulation.h"
 
-static void	ft_eating_philo(pthread_mutex_t *forks, \
-													t_philosopher *philosopher)
+static void	ft_eating_philo(t_philosopher *philosopher)
 {
-	pthread_mutex_lock(&forks[philosopher->left_fork]);
+	sem_wait(g_simulation.forks);
 	ft_print_message(philosopher->id, TAKE_FORK);
-	pthread_mutex_lock(&forks[philosopher->right_fork]);
+	sem_wait(g_simulation.forks);
 	ft_print_message(philosopher->id, TAKE_FORK);
 	ft_print_message(philosopher->id, EATING);
 	philosopher->time_last_eat = ft_get_time_now(g_simulation.t_time);
 	ft_msleep(g_simulation.input_data->time_to_eat);
 	++philosopher->count_eat;
-	pthread_mutex_unlock(&forks[philosopher->right_fork]);
-	pthread_mutex_unlock(&forks[philosopher->left_fork]);
+	sem_post(g_simulation.forks);
+	sem_post(g_simulation.forks);
 }
 
 static void	ft_another_action_philo(t_philosopher *philosopher)
@@ -37,17 +36,16 @@ static void	ft_another_action_philo(t_philosopher *philosopher)
 void	*ft_routina(void *args)
 {
 	t_philosopher	*philosopher;
-	pthread_mutex_t	*forks;
 
 	philosopher = (t_philosopher *)args;
-	forks = g_simulation.forks;
 	if (philosopher->id % 2)
 		ft_msleep(60);
-	while (1)
+	while (g_simulation.dead_philo != 1)
 	{
-		ft_eating_philo(forks, philosopher);
-		if (g_simulation.input_data->number_of_lunch != -1 &&\
-			g_simulation.input_data->number_of_lunch <= philosopher->count_eat)
+		ft_eating_philo(philosopher);
+		if (g_simulation.dead_philo || \
+			(g_simulation.input_data->number_of_lunch != -1 && \
+			g_simulation.input_data->number_of_lunch <= philosopher->count_eat))
 			break ;
 		ft_another_action_philo(philosopher);
 	}

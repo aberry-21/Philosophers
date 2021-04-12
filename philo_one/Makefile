@@ -6,11 +6,11 @@
 #    By: aberry <aberry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 20:48:28 by aberry            #+#    #+#              #
-#    Updated: 2021/04/09 17:38:13 by aberry           ###   ########.fr        #
+#    Updated: 2021/04/09 19:01:29 by aberry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY:		all re clean fclean
+.PHONY:		all re clean fclean debug
 
 NAME		=	philo_one
 
@@ -92,5 +92,9 @@ fclean:		clean
 	rm -rf ${NAME}
 
 re:			fclean all
+
+norm:
+	norminette -R CheckForbiddenSourceHeader 
+	norminette -R CheckForbiddenSourceHeader ../tools
 
 -include ${DEPENDS}

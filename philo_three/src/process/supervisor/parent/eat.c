@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_death.c                                      :+:      :+:    :+:   */
+/*   observation_of_philo.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 17:24:15 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:18:49 by aberry           ###   ########.fr       */
+/*   Created: 2021/04/09 17:24:03 by aberry            #+#    #+#             */
+/*   Updated: 2021/04/09 18:19:25 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "simulation.h"
 
-int	ft_check_death(t_philosopher *philosopher)
+void	*ft_supervisor_of_philo_eat(void *args)
 {
-	unsigned long		past_time;
-	unsigned long		time_to_die;
+	int		counter_eat;
+	int		counter;
 
-	time_to_die = g_simulation.input_data->time_to_die + 5;
-	past_time = ft_get_time_now(g_simulation.t_time) \
-												- philosopher->time_last_eat;
-	if (past_time >= time_to_die)
-		return (1);
-	return (0);
+	(void)args;
+	counter_eat = g_simulation.input_data->number_of_philo;
+	counter = 0;
+	while (counter != counter_eat)
+	{
+		sem_wait(g_simulation.eat_philo);
+		++counter;
+	}
+	sem_wait(g_simulation.print_lock);
+	ft_destroy_simulation(&g_simulation, SUCCESS);
+	return (SUCCESS);
 }
