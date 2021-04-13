@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:05:01 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/11 18:42:11 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/13 14:18:27 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_philosopher
 typedef struct s_simulation
 {
 	t_data			*input_data;
-	int 			*array_pid;
+	int				*array_pid;
 	sem_t			*forks;
 	sem_t			*print_lock;
 	sem_t			*dead_philo;
@@ -83,23 +83,50 @@ void				*ft_routina(void *args);
 /*
 ** Создание процессов филосовоф
 */
-void					ft_create_fork_philo(t_philosopher *philosopher, \
+void				ft_create_fork_philo(t_philosopher *philosopher, \
 																	int size);
 
 /*
 ** Начало симуляции
 */
-void	ft_start_simulation(void);
+void				ft_start_simulation(void);
 
+/*
+** Создание потока, отделенного от главного потока
+*/
+void				ft_create_supervisord_detach( \
+									void *(*start_routine)(void *), void *arg);
 
+/*
+** Создание потока, главный поток ожидает дочерний
+*/
+void				ft_create_supervisord_join(void *(*start_routine)(void *), \
+																	void *arg);
 
-void				ft_create_supervisord_join(void *(*start_routine)(void *), void *arg);
+/*
+** Главный поток ждет освобождения семафора, на то что все поели
+*/
 void				*ft_supervisor_of_philo_eat(void *args);
+
+/*
+** Главный поток ждет освобождения семафора, на то что кто то умер
+*/
 void				*ft_supervisor_of_philo_dead(void *args);
 
-void				ft_create_supervisord_detach(void *(*start_routine)(void *), void *arg);
+/*
+** В каждом отдельном процессе создается отдельный поток наблюдающий
+** за философом
+*/
 void				*ft_observation_of_philo(void *args);
+
+/*
+** Супервизор философа проверяет сколько раз он поел
+*/
 int					ft_check_count_eat(t_philosopher *philosopher);
+
+/*
+** Супервизор философа проверяет умер ли он
+*/
 int					ft_check_death(t_philosopher *philosopher);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:26:25 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:16:59 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/13 14:18:49 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	ft_destroy_fork(t_simulation *simulation)
 		sem_unlink(FORKS_SEM);
 	}
 }
+
 static void	ft_destroy_process(t_simulation *simulation)
 {
 	int		counter;

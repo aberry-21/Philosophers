@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:47:44 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/11 18:46:59 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:09:26 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_sem_open(sem_t **semaphore, char *name, int amount)
 static int	ft_create_semaphore(t_simulation *simulation, int size_forks)
 {
 	int				status[4];
-	int 			counter;
+	int				counter;
 
 	status[0] = ft_sem_open(&simulation->forks, FORKS_SEM, size_forks);
 	status[1] = ft_sem_open(&simulation->print_lock, PRINT_SEM, 1);
@@ -49,7 +49,7 @@ static int	ft_init_field(t_simulation *simulation, int argc, \
 	simulation->input_data = ft_init_simulation_arg(argc, argv);
 	if (simulation->input_data == 0)
 		return (FAIL);
-	simulation->array_pid = (int *)malloc( \
+	simulation->array_pid = (int *)malloc(\
 					simulation->input_data->number_of_philo * sizeof(int));
 	if (simulation->array_pid == 0)
 		return (FAIL);

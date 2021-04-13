@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:07:37 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:20:04 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:54:10 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ void	*ft_routina(void *args)
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)args;
-	ft_create_supervisord_detach(ft_observation_of_philo,philosopher);
 	if (philosopher->id % 2)
 		ft_msleep(60);
 	while (1)
 	{
 		ft_eating_philo(philosopher);
 		if (g_simulation.input_data->number_of_lunch == philosopher->count_eat)
-			break;
+			break ;
 		ft_another_action_philo(philosopher);
 	}
 	ft_msleep(100);

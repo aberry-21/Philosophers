@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creat_thread.c                                     :+:      :+:    :+:   */
+/*   creat_fork.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:20:44 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:20:50 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:58:33 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	ft_create_fork_philo(t_philosopher *philosopher, int size)
 		if (status != 0)
 			g_simulation.array_pid[counter] = status;
 		else
+		{
+			ft_create_supervisord_detach(ft_observation_of_philo, \
+														&philosopher[counter]);
 			ft_routina(&philosopher[counter]);
+		}
 		++counter;
 	}
 }

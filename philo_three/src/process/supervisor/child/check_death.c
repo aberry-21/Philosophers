@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:24:15 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/09 18:18:49 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:37:20 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ int	ft_check_death(t_philosopher *philosopher)
 		return (1);
 	return (0);
 }
-
