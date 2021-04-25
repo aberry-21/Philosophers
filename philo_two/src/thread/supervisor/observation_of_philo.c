@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:24:03 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/13 14:19:11 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/25 04:03:47 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_observation_of_philo(t_philosopher *philosopher, int size)
 		while (counter < size)
 		{
 			if (ft_check_count_eat(philosopher, size) == 0)
+			{
+				sem_wait(g_simulation.print_lock);
 				return ;
+			}
 			if (ft_check_death(&philosopher[counter]))
 			{
 				sem_wait(g_simulation.print_lock);

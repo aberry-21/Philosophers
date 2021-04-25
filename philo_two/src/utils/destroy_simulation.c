@@ -32,11 +32,7 @@ static void	ft_destroy_fork(t_simulation *simulation)
 void	ft_destroy_simulation(t_simulation *simulation)
 {
 	if (simulation->print_lock)
-	{
-		sem_post(simulation->print_lock);
-		sem_close(simulation->print_lock);
 		sem_unlink(PRINT_SEM);
-	}
 	ft_destroy_fork(simulation);
 	free(simulation->input_data);
 }

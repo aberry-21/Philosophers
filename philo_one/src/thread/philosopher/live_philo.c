@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:07:37 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/13 14:18:17 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/18 16:16:29 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	ft_eating_philo(pthread_mutex_t *forks, \
 	ft_print_message(philosopher->id, TAKE_FORK);
 	pthread_mutex_lock(&forks[philosopher->right_fork]);
 	ft_print_message(philosopher->id, TAKE_FORK);
+	++philosopher->count_eat;
 	ft_print_message(philosopher->id, EATING);
 	philosopher->time_last_eat = ft_get_time_now(g_simulation.t_time);
 	ft_msleep(g_simulation.input_data->time_to_eat);
-	++philosopher->count_eat;
 	pthread_mutex_unlock(&forks[philosopher->right_fork]);
 	pthread_mutex_unlock(&forks[philosopher->left_fork]);
 }

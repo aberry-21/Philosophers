@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:24:15 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/13 14:28:19 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/25 03:45:43 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int	ft_check_death(t_philosopher *philosopher)
 	unsigned long		past_time;
 	unsigned long		time_to_die;
 
+	if (g_simulation.input_data->number_of_lunch == philosopher->count_eat)
+		return (0);
 	usleep(10);
-	time_to_die = g_simulation.input_data->time_to_die + 5;
+	time_to_die = g_simulation.input_data->time_to_die + 2;
 	past_time = ft_get_time_now(g_simulation.t_time) \
 												- philosopher->time_last_eat;
 	if (past_time >= time_to_die)

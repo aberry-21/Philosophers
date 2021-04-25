@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:24:11 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/13 14:19:09 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/25 04:02:13 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_check_count_eat(t_philosopher *philosopher, int size)
 	int		counter;
 
 	counter = 0;
+	if (g_simulation.input_data->number_of_lunch == -1)
+		return (1);
 	while (counter < size)
 	{
 		if (philosopher[counter].count_eat !=\

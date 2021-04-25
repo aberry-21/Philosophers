@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:07:37 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/13 14:51:18 by aberry           ###   ########.fr       */
+/*   Updated: 2021/04/25 04:02:03 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	ft_eating_philo(t_philosopher *philosopher)
 	sem_wait(g_simulation.forks);
 	ft_print_message(philosopher->id, TAKE_FORK);
 	ft_print_message(philosopher->id, EATING);
+	++philosopher->count_eat;
 	philosopher->time_last_eat = ft_get_time_now(g_simulation.t_time);
 	ft_msleep(g_simulation.input_data->time_to_eat);
-	++philosopher->count_eat;
 	sem_post(g_simulation.forks);
 	sem_post(g_simulation.forks);
 }
