@@ -26,4 +26,5 @@ void	ft_start_simulation(void)
 	ft_create_supervisord_detach(ft_supervisor_of_philo_eat, 0);
 	ft_create_fork_philo(philosopher, size_philo);
 	ft_create_supervisord_join(ft_supervisor_of_philo_dead, 0);
+	free(philosopher);
 }

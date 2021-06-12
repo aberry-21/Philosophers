@@ -6,7 +6,7 @@
 /*   By: aberry <aberry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:26:25 by aberry            #+#    #+#             */
-/*   Updated: 2021/04/29 19:28:45 by aberry           ###   ########.fr       */
+/*   Updated: 2021/06/12 19:55:01 by aberry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_destroy_fork(t_simulation *simulation)
 
 void	ft_destroy_simulation(t_simulation *simulation)
 {
-	if (simulation->print_lock) 
+	if (simulation->print_lock)
 	{
 		sem_close(simulation->print_lock);
 		sem_unlink(PRINT_SEM);
